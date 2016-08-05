@@ -58,13 +58,17 @@ include('dump.php');
 				dataProvider: data,
 
 				areasSettings: {
-					autoZoom: false
+					autoZoom: false,
+					color : "044704",
+					colorSolid : "b2600c"
 				},
 
 				zoomControl: {
 					zoomControlEnabled:false,
 					panControlEnabled:false
 				},
+
+
 
 				"export": {
 					"enabled": false
