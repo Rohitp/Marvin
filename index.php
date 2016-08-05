@@ -53,7 +53,7 @@ include('dump.php');
 				type: "map",
 				"theme": "light",
 
-				colorSteps: 10,
+				colorSteps: 30,
 
 				dataProvider: data,
 
