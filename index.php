@@ -11,43 +11,68 @@ include('dump.php');
 	<link rel="stylesheet" href="js/ammap/ammap.css" type="text/css">
 	<script src="js/ammap/ammap.js" type="text/javascript"></script>
 	<script src="js/ammap/maps/js/worldLow.js" type="text/javascript"></script>
+	<script src="js/jquery.min.js" type="text/javascript"></script>
 
 	<script type="text/javascript">
 
-		var map = AmCharts.makeChart( "chartdiv", {
-			type: "map",
-			"theme": "light",
+		var data1 = {
+			map: "worldLow",
+			areas: [ {
+				id: "IN",
+				value: -8
+			}, {
+				id: "AU	",
+				value: 45
+			}, {
+				id: "US",
+				value: 12
+			} ]
+		};
 
-			colorSteps: 30,
+		$.ajax({
+					type : "POST",
+					cache: false,
+					url : "parse.php",
+					success: function(data){
+					// console.log(data);
+					var mapData = {map : "worldLow", areas : data};
+					console.log(mapData);
+					console.log("Data 1");
+					console.log(data1);
+					drawMap(mapData);
+					},
+					error: function(error){
+						console.log(error);
+					}
+		});
 
-			dataProvider: {
-				map: "worldLow",
-				areas: [ {
-					id: "IN",
-					value: -8
-				}, {
-					id: "AU	",
-					value: 45
-				}, {
-					id: "US",
-					value: 12
-				} ]
-			},
+		// drawMap(data1);
 
-			areasSettings: {
-				autoZoom: false
-			},
+		function drawMap(data) {
+			var map = AmCharts.makeChart( "chartdiv", {
+				type: "map",
+				"theme": "light",
 
-			zoomControl: {
-				zoomControlEnabled:false,
-				panControlEnabled:false
-			},
+				colorSteps: 10,
 
-			"export": {
-				"enabled": false
-			}
+				dataProvider: data,
 
-	} );
+				areasSettings: {
+					autoZoom: false
+				},
+
+				zoomControl: {
+					zoomControlEnabled:false,
+					panControlEnabled:false
+				},
+
+				"export": {
+					"enabled": false
+				}
+
+		} );
+
+}
 
 	</script>
 
