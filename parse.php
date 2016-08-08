@@ -9,6 +9,7 @@ use PHPInsight\Sentiment;
 
 
 $score_array = array();
+$stories = array();
 
 
 $BBC_URL = "http://feeds.bbci.co.uk/news/rss.xml";
@@ -24,12 +25,13 @@ function parse_sentiments($url) {
 
   $newsoutput = new SimpleXMLElement($url, LIBXML_NOCDATA, true);
   $newsoutput = json_decode(json_encode($newsoutput), TRUE);
-
+  // do_dump($newsoutput);
   $sentiment = new Sentiment();
 
   foreach($newsoutput['channel']['item'] as $story) {
     $title = $story["title"];
     $description = $story["description"];
+    $link = $story['link'];
     $scores = $sentiment->score($title." ".$description);
   	$class = $sentiment->categorise($title." ".$description);
     $country_array = extract_country($title." ".$description);
@@ -45,6 +47,10 @@ function parse_sentiments($url) {
         else {
           $GLOBALS['score_array'][$code] += $score;
         }
+    }
+
+    if(sizeof($country_array) > 0) {
+      $GLOBALS['stories'][] = array("country" => $country_array[0], "title" => $title, "description" => $description, "link" => $link);
     }
     // echo "$description is <b> $class </b> with score <b> $score</b> </br>";
   }
@@ -72,7 +78,7 @@ foreach($score_array as $code => $value) {
   $map_array[] = array("id" => $code, "value" => $value);
 }
 
-echo json_encode($map_array);
+echo json_encode(array("areas" => $map_array, "stories" => $stories));
 
 
 
