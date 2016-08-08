@@ -80,7 +80,7 @@
 			// var slider = $('#slider').slideReveal("show");
 			console.log(filteredStories);
 			for (i in filteredStories){
-				$('#newsfeed').append("<a href='"+filteredStories[i].link+"' target='_blank'><h3>"+filteredStories[i].title+"</h3></a><span class='description'>"+filteredStories[i].description+"</span><br>"+"<a href='"+filteredStories[i].link+"' target='_blank'>Read more...</a><br>");
+				$('#newsfeed').append("<a href='"+filteredStories[i].link+"' target='_blank'><h3>"+filteredStories[i].title+"</h3></a><span class='description'>"+filteredStories[i].description+"</span><br>"+"<a href='"+filteredStories[i].link+"' target='_blank'>Read more...</a><hr>");
 			}
 		});
 
@@ -89,6 +89,7 @@
 	</script>
 
 	<style>
+	@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700|Montserrat:400,700);
 	#chartdiv {
 		margin: auto;
 	 	width:56%;
@@ -102,8 +103,14 @@
 		height: 600px;
 		overflow: auto;
 	}
+	h2, h3{
+		font-weight: 700;
+  font-family: Montserrat;
+	}
 	.description {
 		font-size: 14px;
+		font-family: PT Sans;
+  		font-weight: 400;
 	}
 	a{
 		text-decoration: none;
@@ -113,7 +120,7 @@
 </head>
 <body>
 	<div id="chartdiv" style=";"></div>
-	<div id="newsfeed-container"><h2>Newsfeed</h2>Click on the countries to read news
+	<div id="newsfeed-container"><h2>Newsfeed</h2>Click on the countries to read the latest news updates
 	<div id="newsfeed"></div>
 	</div>
 		
