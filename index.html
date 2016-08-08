@@ -14,17 +14,17 @@
 
 	var stories;
 
-	$('#slider').slideReveal("hide");
+	// $('#slider').slideReveal("hide");
 
 		$.ajax({
 					type : "POST",
 					cache: false,
 					url : "parse.php",
 					success: function(data){
-					console.log(data);
+					// console.log(data);
 					var mapData = {map : "worldLow", areas : data.areas};
 					stories = data.stories;
-					// console.log(mapData);
+					// console.log(stories);
 					drawMap(mapData);
 					},
 					error: function(error){
@@ -45,14 +45,14 @@
 
 				areasSettings: {
 					autoZoom: true,
-					color : "044704",
-					colorSolid : "b2600c"
+					color : "b2600c",
+					colorSolid : "044704"
 				},
 
 				valueLegend: {
 				 right: 10,
-				 minValue: "Positive",
-				 maxValue: "Negative"
+				 minValue: "Negative",
+				 maxValue: "Positive"
  				},
 
 				zoomControl: {
@@ -69,6 +69,7 @@
 		} );
 
 		map.addListener("clickMapObject", function (event) {
+			$('#newsfeed').html('');
     	// console.log(event.mapObject.id);
 			var filteredStories = [];
 			for (i in stories) {
@@ -78,6 +79,9 @@
 			}
 			// var slider = $('#slider').slideReveal("show");
 			console.log(filteredStories);
+			for (i in filteredStories){
+				$('#newsfeed').append("<a href='"+filteredStories[i].link+"' target='_blank'><h3>"+filteredStories[i].title+"</h3></a><span class='description'>"+filteredStories[i].description+"</span><br>"+"<a href='"+filteredStories[i].link+"' target='_blank'>Read more...</a><br>");
+			}
 		});
 
 }
@@ -87,13 +91,31 @@
 	<style>
 	#chartdiv {
 		margin: auto;
-	 	width: 50%;
+	 	width:56%;
+	 	float: left;
+	 	height: 600px
+	}
+	#newsfeed-container {
+		width: 40%;
+		float: left;
+		padding:2%;
+		height: 600px;
+		overflow: auto;
+	}
+	.description {
+		font-size: 14px;
+	}
+	a{
+		text-decoration: none;
 	}
 
 	</style>
 </head>
 <body>
-	<div id="chartdiv" style="width: 800px; height: 600px;"></div>
+	<div id="chartdiv" style=";"></div>
+	<div id="newsfeed-container"><h2>Newsfeed</h2>Click on the countries to read news
+	<div id="newsfeed"></div>
+	</div>
 		
 
 
