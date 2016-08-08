@@ -93,7 +93,7 @@
 	#chartdiv {
 		margin: auto;
 	 	width:56%;
-	 	float: left;
+	 	/*float: left;*/
 	 	height: 600px
 	}
 	#newsfeed-container {
@@ -102,6 +102,7 @@
 		padding:2%;
 		height: 600px;
 		overflow: auto;
+		display: none;
 	}
 	h2, h3{
 		font-weight: 700;
@@ -120,11 +121,23 @@
 </head>
 <body>
 	<div id="chartdiv" style=";"></div>
-	<div id="newsfeed-container"><h2>Newsfeed</h2>Click on the countries to read the latest news updates
+	<div id="newsfeed-container"><h2>Newsfeed</h2><!-- Click on the countries to read the latest news updates -->
 	<div id="newsfeed"></div>
 	</div>
 		
 
 
 </body>
+<script type="text/javascript">
+var showNewsfeed=false;
+	$(document).on("click","#chartdiv",function(){
+		if(!showNewsfeed){
+			$("#newsfeed-container").animate({
+				width:'toggle'
+			},1000);
+			$("#chartdiv").css("float","left");
+			showNewsfeed = true;
+		}
+		});
+</script>
 </html>
