@@ -129,10 +129,37 @@
 				top:0;
 			}
 
+	.btn {
+      -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 1.15em;
+    padding: 0.7em 1.2em;
+    background: white;
+    border: 2px solid #41a9d5;
+    color: #41a9d5 !important;
+    -webkit-border-radius: 0em;
+    -moz-border-radius: 0em;
+    border-radius: 0em;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.05);
+      text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+    line-height: 1em;
+    }
+     .btn:hover{
+      background: #41a9d5;
+    color: #ffffff !important;
+    text-decoration: none;
+    }
+
 	</style>
 </head>
 <body>
-<button class="btn-toggle hidden">Toggle</button>
+<a href="http://alertcandy.com/demo" class='btn' style="position:absolute;left:7%;top:5px;z-index:1000">Back to home</a>
+<button class="btn-toggle hidden btn">Toggle</button>
 	<div id="chartdiv" style=";"></div>
 	<div id="newsfeed-container"><h2>Newsfeed</h2>Click on the countries to read the latest news updates
 	<div id="newsfeed"></div>
